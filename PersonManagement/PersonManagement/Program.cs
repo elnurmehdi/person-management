@@ -99,7 +99,8 @@ namespace PersonManagement
     }
 
     class Person
-    {
+    {   public static uint IdCounter = 1;
+        public uint Id { get; private set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string FIN { get; set; }
@@ -109,6 +110,8 @@ namespace PersonManagement
             Name = name;
             LastName = lastName;
             FIN = fin;
+            Id= IdCounter++;
+
         }
 
         public string GetFullName()
@@ -118,7 +121,7 @@ namespace PersonManagement
 
         public string GetInfo()
         {
-            return Name + " " + LastName + " " + FIN;
+            return Id +" "+Name + " " + LastName + " " + FIN;
         }
 
     }
