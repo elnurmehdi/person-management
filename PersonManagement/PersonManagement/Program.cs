@@ -11,9 +11,10 @@ namespace PersonManagement
 
             Console.WriteLine("Our available commands :");
             Console.WriteLine("/add-new-person");
-            Console.WriteLine("/remove-person");
+            Console.WriteLine("/remove-person-by-fin");
             Console.WriteLine("/show-persons");
             Console.WriteLine("/remove-all-persons");
+            Console.WriteLine("/remove-by-Id");
             Console.WriteLine("/exit");
 
 
@@ -39,7 +40,7 @@ namespace PersonManagement
                     Console.WriteLine(person.GetInfo() + " - Added to system.");
 
                 }
-                else if (command == "/remove-person")
+                else if (command == "/remove-person-by-fin")
                 {
                     Console.Write("To remove person, please enter his/her FIN code : ");
                     string fin = Console.ReadLine();
@@ -76,6 +77,12 @@ namespace PersonManagement
                     }
                     Console.WriteLine("All persons successfully removed!");
                 }
+                else if (command == "/remove-by-Id")
+                {
+                    Console.WriteLine("Please, enter person's id number: ");
+                    uint id = Convert.ToUInt32(Console.ReadLine());
+                    RemoveById(id);
+                }
                 else if (command == "/exit")
                 {
                     Console.WriteLine("Thanks for using our application!");
@@ -96,10 +103,25 @@ namespace PersonManagement
             return person;
         }
 
+        public static uint RemoveById( uint Id)
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                if(persons[i].Id==Id)
+                {
+                    Console.WriteLine(persons[i].GetInfo());
+                    persons.RemoveAt(i);
+                    Console.WriteLine("Person removed successfully!");
+
+                }
+            }
+                return Id;
+        }
+
     }
 
     class Person
-    {   public static uint IdCounter = 1;
+    {   private  static uint IdCounter = 1;
         public uint Id { get; private set; }
         public string Name { get; set; }
         public string LastName { get; set; }
