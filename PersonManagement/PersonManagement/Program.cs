@@ -5,9 +5,9 @@ namespace PersonManagement
 {
     internal class Program
     {
+        public static List<Person> persons { get; set; } = new List<Person>();
         static void Main(string[] args)
         {
-            List<Person> persons = new List<Person>();
 
             Console.WriteLine("Our available commands :");
             Console.WriteLine("/add-new-person");
@@ -15,6 +15,7 @@ namespace PersonManagement
             Console.WriteLine("/show-persons");
             Console.WriteLine("/remove-all-persons");
             Console.WriteLine("/exit");
+
 
             while (true)
             {
@@ -24,6 +25,7 @@ namespace PersonManagement
 
                 if (command == "/add-new-person")
                 {
+
                     Console.Write("Please add person's name :");
                     string name = Console.ReadLine();
 
@@ -32,9 +34,7 @@ namespace PersonManagement
 
                     Console.Write("Please add person's FIN code :");
                     string fin = Console.ReadLine();
-
-                    Person person = new Person(name, lastName, fin);
-                    persons.Add(person);
+                    Person person = GetAddNewPerson(name, lastName, fin);
 
                     Console.WriteLine(person.GetInfo() + " - Added to system.");
 
@@ -69,12 +69,12 @@ namespace PersonManagement
                 }
                 else if (command == "/remove-all-persons")
                 {
-                    for (int i = persons.Count-1; i >= 0; i--)
+                    for (int i = persons.Count - 1; i >= 0; i--)
                     {
                         persons.RemoveAt(i);
-                      
+
                     }
-                        Console.WriteLine("All persons successfully removed!");
+                    Console.WriteLine("All persons successfully removed!");
                 }
                 else if (command == "/exit")
                 {
@@ -87,7 +87,15 @@ namespace PersonManagement
                     Console.WriteLine();
                 }
             }
+
         }
+        public static Person GetAddNewPerson(string name, string lastName, string fin)
+        {
+            Person person = new Person(name, lastName, fin);
+            persons.Add(person);
+            return person;
+        }
+
     }
 
     class Person
@@ -112,5 +120,6 @@ namespace PersonManagement
         {
             return Name + " " + LastName + " " + FIN;
         }
+
     }
 }
