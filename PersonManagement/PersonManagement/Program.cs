@@ -13,6 +13,7 @@ namespace PersonManagement
             Console.WriteLine("/add-new-person");
             Console.WriteLine("/remove-person");
             Console.WriteLine("/show-persons");
+            Console.WriteLine("/remove-all-persons");
             Console.WriteLine("/exit");
 
             while (true)
@@ -50,6 +51,7 @@ namespace PersonManagement
                             persons.RemoveAt(i);
                             Console.WriteLine("Person removed successfully");
                         }
+
                     }
 
                 }
@@ -60,6 +62,19 @@ namespace PersonManagement
                     {
                         Console.WriteLine(person.GetInfo());
                     }
+                    if (persons.Count == 0)
+                    {
+                        Console.WriteLine("Person database is empty!");
+                    }
+                }
+                else if (command == "/remove-all-persons")
+                {
+                    for (int i = persons.Count-1; i >= 0; i--)
+                    {
+                        persons.RemoveAt(i);
+                      
+                    }
+                        Console.WriteLine("All persons successfully removed!");
                 }
                 else if (command == "/exit")
                 {
